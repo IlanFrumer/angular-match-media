@@ -1,7 +1,7 @@
 {
   "name": "angular-match-media",
   "main": "angular-match-media.js",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "homepage": "https://github.com/IlanFrumer/angular-match-media",
   "authors": [
     "ilanfrumer <ilanfrumer@gmail.com>"

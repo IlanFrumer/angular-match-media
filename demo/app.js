@@ -5,5 +5,5 @@ app.config(function(devicesProvider){
 })
 
 app.run(function($rootScope, devices){
-  $rootScope.devices = devices;
+  $rootScope.devices = devices.list;
 })

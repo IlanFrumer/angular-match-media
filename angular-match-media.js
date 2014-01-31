@@ -21,24 +21,31 @@
     };
 
     return {
+      config:{
+        show : 'showOn', // <div show-on-XXXXX>
+        styles: 'mediaStyles'
+      },
       set: function(device, query){
         devices[device] = query;
       },
       $get: function(){
-        return devices;
+        return {
+          list: devices,
+          config: this.config
+        };
       }
     };
   }])
 
-  .run(['devices', function(devices){
+  .run(['devices', '$window' , function(devices, $window){
 
-    angular.forEach(devices , function(query, device){
+    angular.forEach(devices.list , function(query, device){
 
-      var directiveName = 'showOn' +
+      var directiveName = devices.config.show +
                           device.charAt(0).toUpperCase() +
                           device.slice(1).toLowerCase();
 
-      $compileProvider.directive( directiveName , ['$window', function ($window) {
+      $compileProvider.directive( directiveName , function () {
         return {
           transclude: 'element',
           priority: 1001,
@@ -76,8 +83,48 @@
             });
           }
         };
-      }]);
+      });
     });
+  }])
+
+  .run(['devices', '$window', function(devices, $window){
+
+    $compileProvider.directive( devices.config.styles , function () {
+      return {
+        link: function(scope, element, attrs){
+
+          var destroyCb = [];
+
+          // register an event listerner for each device
+          angular.forEach(devices.list, function(query, device){
+            
+            var mql = $window.matchMedia(query);
+
+            var queryHandler = function(results){
+              var action = results.matches ? "addClass" : "removeClass";
+              element[action](device);
+            };
+
+            mql.addListener(queryHandler);
+
+            queryHandler(mql);
+
+            destroyCb.push(function(){
+              mql.removeListener(queryHandler);
+            });
+
+          });
+
+          // remove all event listeners when the element is destroyed
+          element.on('$destroy', function(){
+            angular.forEach(destroyCb , function(cb){
+              cb();
+            });
+          });
+        }
+      };
+    });
+
   }]);
 
 }(angular));
