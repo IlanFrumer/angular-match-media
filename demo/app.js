@@ -1,10 +1,9 @@
 var app = angular.module('media',['ngMatchMedia']);
 
-app.config(function(deviceProvider){
-  deviceProvider.set('big','(min-width:520px)');
-  deviceProvider.init();
+app.config(function(devicesProvider){
+  devicesProvider.set('big','(min-width:520px)');
 })
 
-app.run(function($rootScope, device){
-  $rootScope.device = device;
+app.run(function($rootScope, devices){
+  $rootScope.devices = devices;
 })
