@@ -22,8 +22,9 @@
 
     return {
       config:{
-        show : 'showOn', // <div show-on-XXXXX>
-        styles: 'mediaStyles'
+        showPrefix : 'showOn',
+        stylesPrefix: 'media-',
+        stylesDirective: 'mediaStyles'
       },
       set: function(device, query){
         devices[device] = query;
@@ -41,7 +42,7 @@
 
     angular.forEach(devices.list , function(query, device){
 
-      var directiveName = devices.config.show +
+      var directiveName = devices.config.showPrefix +
                           device.charAt(0).toUpperCase() +
                           device.slice(1).toLowerCase();
 
@@ -89,7 +90,7 @@
 
   .run(['devices', '$window', function(devices, $window){
 
-    $compileProvider.directive( devices.config.styles , function () {
+    $compileProvider.directive( devices.config.stylesDirective , function () {
       return {
         link: function(scope, element, attrs){
 
@@ -102,7 +103,7 @@
 
             var queryHandler = function(results){
               var action = results.matches ? "addClass" : "removeClass";
-              element[action](device);
+              element[action]( devices.config.stylesPrefix + device);
             };
 
             mql.addListener(queryHandler);
