@@ -1,0 +1,57 @@
+<!doctype html>
+<html ng-app="media">
+<head>
+  <meta charset="UTF-8">
+  <meta name='viewport' content='width=device-width initial-scale=1.0'>
+  <title>Angular match media</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
+  <script src="../angular-match-media.js"></script>
+  <script src="app.js"></script>
+</head>
+<body>
+   
+  <div show-on-big>
+    <a href="https://github.com/IlanFrumer/angular-match-media">
+     <img style="position: absolute; top: 0; left: 0; border: 0;" 
+          ng-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" 
+          alt="Fork me on GitHub">
+    </a>
+  </div>
+
+  <div class="container">
+
+    <div>
+      <a href="https://github.com/IlanFrumer/angular-match-media" target="_blank">
+        <h1>Angular match media</h1> 
+      </a>
+      <span>Resize the screen to load different content!</span>
+    </div>
+
+    <hr>
+
+    <div show-on-mobile>
+      <h2>Mobile</h2>
+    
+      <img ng-src="//placehold.it/250x150/85BBEA&text={{device.mobile}}">
+    </div>
+
+    <div show-on-tablet>
+      <h2>Tablet</h2>
+      <img ng-src="//placehold.it/481x200/DDFF44&text={{device.tablet}}">
+    </div>
+
+    <div show-on-laptop>
+      <h2>Laptop</h2>
+      <img ng-src="//placehold.it/900x300/3353E0&text={{device.laptop}}">
+    </div>
+
+    <div show-on-desktop>
+      <h2>Desktop</h2>
+      <img ng-src="//placehold.it/1200x500/FFDEA7&text={{device.desktop}}">
+    </div>  
+
+  </div>
+
+</body>
+</html>
