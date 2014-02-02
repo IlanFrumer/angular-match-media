@@ -27,7 +27,11 @@
         stylesDirective: 'mediaStyles'
       },
       set: function(device, query){
-        devices[device] = query;
+        if(angular.isUndefined(query)) {
+          devices = device;
+        } else {
+          devices[device] = query;
+        }
       },
       $get: function(){
         return {

@@ -17,7 +17,10 @@ hr {
   width: 70%;
 }
 
-
-.media-big {
+.nitsan-big {
   background: #ddd;
+}
+
+.nitsan-desktop {
+  color: red;
 }
